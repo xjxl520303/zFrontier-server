@@ -1,52 +1,20 @@
 # zFrontier-server
 使用 Nuxt 仿 zFrontier 装备在线网站服务器实现
 
-## Description
+## 功能
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- JWT授权登录
+- 第三方授权登录
+- OpenAPI文档
+- Prisma + PostgreSQL
 
-## Installation
+## 计划
 
-```bash
-$ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- [ ] 用户登录/注册
+    - [ ] 手机号登录/注册
+    - [ ] 第三方授权登录/注册
+        - [ ] 微信快速登录
+        - [ ] QQ快速登录
+        - [ ] Facebook快速登录
+        - [ ] Google快速登录
+- [ ] JWT授权
