@@ -18,3 +18,4 @@
         - [ ] Facebook快速登录
         - [ ] Google快速登录
 - [ ] JWT授权
+- [ ] Docker部署
