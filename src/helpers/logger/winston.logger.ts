@@ -3,7 +3,7 @@ import { WinstonModule } from 'nest-winston';
 import { format, transports } from 'winston';
 import * as clc from 'cli-color';
 import safeStringify from 'fast-safe-stringify';
-import path = require('path');
+import { join } from 'path';
 import { inspect } from 'util';
 import * as DailyRotateFile from 'winston-daily-rotate-file';
 
@@ -14,7 +14,7 @@ const formatter = format.combine(
   format.ms(),
   format.printf((info) => {
     const { context, level, timestamp, message, ms, ...meta } = info;
-    const nestLikeColorScheme: Record<string, clc.bare.format> = {
+    const nestLikeColorScheme: Record<string, clc.Format> = {
       info: clc.green,
       error: clc.red,
       warn: clc.yellow,
@@ -43,7 +43,7 @@ const formatter = format.combine(
 const rotateTransport: DailyRotateFile = new DailyRotateFile({
   format: format.uncolorize(),
   filename: 'zfrontier-%DATE%.log',
-  dirname: path.join(process.cwd(), './logs'),
+  dirname: join(process.cwd(), './logs'),
   datePattern: 'YYYY-MM-DD',
   zippedArchive: true,
   maxSize: '20m',
