@@ -6,6 +6,7 @@ export interface Config {
   security: SecurityConfig;
   logger: LoggerConfig;
   db: DbConfig;
+  tencentcloud: TencentcloudConfig;
 }
 
 export interface AppConfig {
@@ -44,4 +45,19 @@ export interface DbConfig {
   host: string;
   port: number;
   database: string;
+}
+
+export interface TencentcloudConfig {
+  secretId: string;
+  secretKey: string;
+  region: string;
+  sms: {
+    smsAppId: string;
+    region: string;
+    signName: string;
+  },
+  captcha: {
+    captchaAppId: string;
+    region: string;
+  }
 }

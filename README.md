@@ -1,10 +1,13 @@
 # zFrontier-server
 使用 Nuxt 仿 zFrontier 装备在线网站服务器实现
 
-## 功能
+## 集成功能
 
 - JWT授权登录
 - 第三方授权登录
+- 腾讯云
+    - 短信服务
+    - 验证服务
 - OpenAPI文档
 - Prisma + PostgreSQL
 

@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
+// import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 // import * as csurf from 'csurf';
-import { WinstonLogger } from './helpers/logger/winston.logger';
+import { WinstonLogger } from './helpers';
 import { NestConfig, CorsConfig, SwaggerConfig, LoggerConfig } from './configs/config.interface';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -19,6 +19,7 @@ async function bootstrap() {
   const loggerConfig = configService.get<LoggerConfig>('logger');
 
   // app.use(csurf);
+  console.log('fkdskfjskf')
 
   corsConfig.enabled && app.enableCors();
   loggerConfig.enabled && app.useLogger(WinstonLogger);

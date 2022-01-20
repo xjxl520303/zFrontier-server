@@ -1,26 +1,27 @@
 import { Controller, Get, Logger } from '@nestjs/common';
 import { AppService } from './app.service';
+import { SmsService } from './providers/sms/sms.service';
 
-/**
-  * Example of usage:
-  * <example-url>http://localhost/demo/mysample.component.html</example-url>
-  * <example-url>/demo/mysample.component.html</example-url>
-  */
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private readonly logger: Logger) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly logger: Logger,
+    private readonly smsService: SmsService
+  ) {}
 
   @Get()
   getHello(): string {
-    this.logger.log(new Error('有问题来了'))
     return this.appService.getHello();
   }
 
   /**
    * @ignore
    */
-  @Get()
-  test(): string {
+  @Get('sms')
+  test() {
+    this.smsService.getSmsTemplateStatus([1282279]);
+    // this.smsService.sendSms(['13247220346'], '1282279', ['123456']);
     return 'kkkk';
   }
 }
