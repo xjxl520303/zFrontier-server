@@ -20,8 +20,13 @@ export class AppController {
    */
   @Get('sms')
   test() {
-    this.smsService.getSmsTemplateStatus([1282279]);
-    // this.smsService.sendSms(['13247220346'], '1282279', ['123456']);
+    this.smsService.getSmsTemplateStatus();
+
+    // this.smsService.sendSms({
+    //   phoneNumberSet: ['13247220346'],
+    //   templateId: '1282279',
+    //   templateParamSet: ['123456']
+    // })
     return 'kkkk';
   }
 }
