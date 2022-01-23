@@ -1,3 +1,5 @@
+import { customAlphabet } from 'nanoid';
+
 /**
  * 是否为对象
  * @param val 参数
@@ -60,4 +62,11 @@ export function toLowerCaseOfObjectKey<T>(val: object): T {
     })
   }
   return result as T;
+}
+
+/**
+ * 生成短信6位验证码
+ */
+export const generateSmsShortId = () => {
+  return customAlphabet('0123456789', 6)();
 }
