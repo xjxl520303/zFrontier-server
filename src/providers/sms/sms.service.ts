@@ -3,7 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import * as tencentcloud from 'tencentcloud-sdk-nodejs';
 import { ClientConfig } from 'tencentcloud-sdk-nodejs/src/common/interface';
 import { TencentcloudConfig } from "src/configs/config.interface";
-import { toLowerCaseOfObjectKey, toUpperCaseOfObjectKey, isDigit} from 'src/helpers';
+import { toLowerCaseOfObjectKey, toUpperCaseOfObjectKey, isDigit } from '../../helpers';
 import { DescribeSmsTemplateListRequest, SendSmsRequest } from "tencentcloud-sdk-nodejs/tencentcloud/services/sms/v20210111/sms_models";
 import { Client } from "tencentcloud-sdk-nodejs/tencentcloud/services/sms/v20210111/sms_client";
 
