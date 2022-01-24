@@ -1,11 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 // import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
-// import * as csurf from 'csurf';
+import * as csurf from 'csurf';
 import { WinstonLogger } from './helpers';
 import { NestConfig, CorsConfig, SwaggerConfig, LoggerConfig } from './configs/config.interface';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
+import { HttpExceptionsFilter } from './filters';
+import { ValidationPipe } from './pipes';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -18,8 +21,14 @@ async function bootstrap() {
   const swaggerConfig = configService.get<SwaggerConfig>('swagger');
   const loggerConfig = configService.get<LoggerConfig>('logger');
 
-  // app.use(csurf);
-  console.log('fkdskfjskf')
+
+  app.use(cookieParser());
+  app.use(csurf({
+    cookie: true
+  }));
+  app.setGlobalPrefix(nestConfig.apiPrefix);
+  app.useGlobalFilters(new HttpExceptionsFilter);
+  app.useGlobalPipes(new ValidationPipe())
 
   corsConfig.enabled && app.enableCors();
   loggerConfig.enabled && app.useLogger(WinstonLogger);

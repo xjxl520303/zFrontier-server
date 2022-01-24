@@ -3,11 +3,12 @@ import { getEnv, getEnvBoolean, getEnvNumber } from './helper';
 
 export default () => ({
   nest: {
-    port: getEnvNumber('PORT', 3000)
+    port: getEnvNumber('PORT', 3000),
+    apiPrefix: getEnv('API_PREFIX', 'api')
   },
   app: {
     name: getEnv('APP_NAME', 'zFrontier 装备在线'),
-    description: getEnv('APP_DESCRIPTION', 'zFrontier 装备前线 - 机械键盘、键帽、HiFi、摄影装备发烧友聚集地。用更强的装备，探索更大的世界。')
+    description: getEnv('APP_DESCRIPTION', 'zFrontier 装备前线 - 机械键盘、键帽、HiFi、摄影装备发烧友聚集地。用更强的装备，探索更大的世界。'),
   },
   cors: {
     enabled: getEnvBoolean('CORS_ENABLED')
@@ -42,5 +43,11 @@ export default () => ({
       captchaAppId: getEnv('TENCENTCLOUD_CAPTCHA_APP_ID'),
       region: getEnv('TENCENTCLOUD_CAPTCHA_REGION')
     }
+  },
+  auth: {
+    accessToken: getEnv('APP_ACCESS_TOKEN', 'zfrontier'),
+    accessTokenExpiresIn: getEnv('APP_ACCESS_TOKEN_EXPIRES_IN', '6h'),
+    refreshToken: getEnv('APP_REFRESH_TOKEN', 'zfrontier-refresh'),
+    refreshTokenExpiresIn: getEnv('APP_REFRESH_TOKEN_EXPIRES_IN', '24h')
   }
 } as Config);

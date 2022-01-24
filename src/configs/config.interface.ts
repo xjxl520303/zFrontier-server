@@ -7,6 +7,7 @@ export interface Config {
   logger: LoggerConfig;
   db: DbConfig;
   tencentcloud: TencentcloudConfig;
+  auth: AuthConfig;
 }
 
 export interface AppConfig {
@@ -16,6 +17,7 @@ export interface AppConfig {
 
 export interface NestConfig {
   port: number;
+  apiPrefix: string;
 }
 
 export interface CorsConfig {
@@ -60,4 +62,11 @@ export interface TencentcloudConfig {
     captchaAppId: string;
     region: string;
   }
+}
+
+export interface AuthConfig {
+  accessToken: string;
+  accessTokenExpiresIn: string;
+  refreshToken: string;
+  refreshTokenExpiresIn: string;
 }

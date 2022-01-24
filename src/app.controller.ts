@@ -12,6 +12,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    console.log('jfdksf')
     return this.appService.getHello();
   }
 
@@ -20,7 +21,7 @@ export class AppController {
    */
   @Get('sms')
   test() {
-    this.smsService.getSmsTemplateStatus();
+    // this.smsService.getSmsTemplateStatus();
 
     // this.smsService.sendSms({
     //   phoneNumberSet: ['13247220346'],
