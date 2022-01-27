@@ -70,3 +70,10 @@ export function toLowerCaseOfObjectKey<T>(val: object): T {
 export const generateSmsShortId = () => {
   return customAlphabet('0123456789', 6)();
 }
+
+/**
+ * 生成用户主页12位Hash地址串
+ */
+export const generateUserHomepageHash = () => {
+  return customAlphabet('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 12)();
+}

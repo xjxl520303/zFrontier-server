@@ -6,6 +6,7 @@ import { Request } from 'express';
 import { UserService } from '../../user/user.service';
 import { User } from '@prisma/client';
 import { AuthConfig } from '../../../configs/config.interface';
+import { TokenPayload } from '../token-payload.interface';
 
 @Injectable()
 export class JwtRefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refresh-token') {
@@ -24,8 +25,8 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-ref
     });
   }
 
-  async validate(request: Request, userId: number): Promise<User> {
+  async validate(request: Request, payload: TokenPayload): Promise<Pick<User, 'id'>> {
     const refreshToken = request.cookies?.Refresh;
-    return await this.userService.isValidRefreshToken(refreshToken, userId);
+    return await this.userService.isValidRefreshToken(refreshToken, payload.userId);
   }
 }

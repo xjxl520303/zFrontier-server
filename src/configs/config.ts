@@ -13,6 +13,9 @@ export default () => ({
   cors: {
     enabled: getEnvBoolean('CORS_ENABLED')
   },
+  csurf: {
+    enabled: getEnvBoolean('CSURF_ENABLED', true)
+  },
   swagger: {
     enabled: getEnvBoolean('SWAGGER_ENABLED'),
     title: getEnv('SWAGGER_TITLE', 'Nest.js'),

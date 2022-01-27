@@ -2,7 +2,7 @@
     "name": "zFrontier 服务端文档",
     "language": "zh-CN",
     "serve": true,
-    "port": 8090,
+    "port": 8088,
     "watch": true,
     "hideGenerator": true,
     "disableSearch": true,

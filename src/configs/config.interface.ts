@@ -2,6 +2,7 @@ export interface Config {
   nest: NestConfig;
   app: AppConfig;
   cors: CorsConfig;
+  csurf: CsurfConfig;
   swagger: SwaggerConfig;
   security: SecurityConfig;
   logger: LoggerConfig;
@@ -21,6 +22,10 @@ export interface NestConfig {
 }
 
 export interface CorsConfig {
+  enabled: boolean;
+}
+
+export interface CsurfConfig {
   enabled: boolean;
 }
 
