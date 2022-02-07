@@ -1,15 +1,22 @@
-import { IsIn, IsObject, IsOptional, IsPhoneNumber, IsString, Length, MinLength } from "class-validator";
+import { IsIn, IsNotEmpty, IsObject, IsOptional, IsPhoneNumber, IsString, Length, MinLength, ValidateNested } from "class-validator";
 import * as swagger from '@nestjs/swagger';
+import { Type } from "class-transformer";
 
 class CaptchaDto {
   @IsString()
-  ticket;
+  @IsNotEmpty({ message: 'ticket不能为空' })
+  @swagger.ApiProperty({ type: 'string', description: '票据' })
+  ticket: string;
 
   @IsString()
-  randstr;
+  @IsNotEmpty({ message: 'randstr不能为空' })
+  @swagger.ApiProperty({ type: 'string', description: '随机串' })
+  randstr: string;
 
   @IsString()
-  captchaid;
+  @IsNotEmpty({ message: 'captchaid不能为空' })
+  @swagger.ApiProperty({ type: 'string', description: '验证码ID' })
+  captchaid: string;
 }
 
 /**
@@ -17,29 +24,38 @@ class CaptchaDto {
  */
 export class AuthCodeDto {
   @IsString()
-  @IsIn(['register'])
+  @IsIn(['register'], { message: '[type]参数必须为register' })
+  @swagger.ApiProperty({ type: 'string', description: '短信发送场景，这里默认传 `register`', default: 'register' })
   type;
 
   @IsString()
   @IsPhoneNumber('CH', { message: '手机号格式应为：+[国家（或地区）码][手机号]，例如：+8613711112222' })
+  @swagger.ApiProperty({ type: 'string', description: '手机号, 格式为：+[国家（或地区）码][手机号]' })
   mobile;
 
   @IsString()
-  @MinLength(8, { message: '密码至少8个字符' })
   @IsOptional()
+  @MinLength(8, { message: '密码至少8个字符' })
+  @swagger.ApiPropertyOptional({ type: 'string', description: '密码' })
   password?;
 
   @IsString()
-  @Length(6, 6, { message: '请正确填写短信验证码'})
   @IsOptional()
+  @Length(6, 6, { message: '请正确填写短信验证码'})
+  @swagger.ApiPropertyOptional({ type: 'string', description: '短信验证码' })
   code?;
 
   @IsString()
-  nickname = 'random';
+  @IsNotEmpty({ message: 'nickname不能为空, 无值传random' })
+  @swagger.ApiProperty({ type: 'string', description: '用户昵称，无值传 `random`', default: 'random' })
+  nickname;
 
   @IsObject()
   @IsOptional()
-  captcha?: CaptchaDto;
+  @ValidateNested()
+  @Type(() => CaptchaDto)
+  @swagger.ApiPropertyOptional({ type: CaptchaDto, description: '腾讯云验证码参数' })
+  captcha?;
 }
 
 /**
@@ -63,30 +79,35 @@ export class LoginByMobileDto {
 export class mobileRegisterDto {
   @IsString()
   @IsIn(['register'])
-  type;
+  @swagger.ApiProperty({ type: 'string', description: '短信发送场景，这里默认传 `register`', default: 'register' })
+  type = 'register';
 
   @IsString()
   @IsPhoneNumber('CH', { message: '手机号格式应为：+[国家（或地区）码][手机号]，例如：+8613711112222' })
   @swagger.ApiProperty({ type: 'string', description: '手机号, 格式为：+[国家（或地区）码][手机号]' })
-  mobile;
+  mobile: string;
 
   @IsString()
   @MinLength(8, { message: '密码至少8个字符' })
   @IsOptional()
-  @swagger.ApiProperty({ type: 'string', required: false, description: '密码' })
-  password?;
+  @swagger.ApiPropertyOptional({ type: 'string', description: '密码' })
+  password?: string;
 
   @IsString()
   @Length(6, 6, { message: '请正确填写短信验证码'})
   @IsOptional()
-  @swagger.ApiProperty({ type: 'string', required: false, description: '验证码' })
-  code?;
+  @swagger.ApiPropertyOptional({ type: 'string', description: '验证码' })
+  code?: string;
 
   @IsString()
-  @swagger.ApiProperty({ type: 'string', required: false, description: '昵称' })
+  @IsNotEmpty({ message: 'nickname不能为空, 无值传random' })
+  @swagger.ApiProperty({ type: 'string', description: '用户昵称，无值传 `random`', default: 'random' })
   nickname = 'random';
 
   @IsObject()
   @IsOptional()
-  captcha?: CaptchaDto;
+  @ValidateNested()
+  @Type(() => CaptchaDto)
+  @swagger.ApiPropertyOptional({ type: CaptchaDto, description: '腾讯云验证码参数' })
+  captcha?;
 }
