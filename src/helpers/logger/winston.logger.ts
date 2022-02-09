@@ -1,11 +1,11 @@
 import { Logger, LoggerService } from '@nestjs/common';
 import { WinstonModule } from 'nest-winston';
 import { format, transports } from 'winston';
-import * as clc from 'cli-color';
+import clc from 'cli-color';
 import safeStringify from 'fast-safe-stringify';
 import { join } from 'path';
 import { inspect } from 'util';
-import * as DailyRotateFile from 'winston-daily-rotate-file';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
 const formatter = format.combine(
   format.timestamp({
