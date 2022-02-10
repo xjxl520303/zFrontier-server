@@ -2,8 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
-import * as ms from 'ms';
+import ms from 'ms';
 import { AuthConfig } from '../../configs/config.interface';
+import { generateSmsShortId } from '../../helpers';
 import { SmsService } from '../../providers/sms/sms.service';
 import { UserService } from '../user/user.service';
 import { mobileRegisterDto } from './auth.dto';
@@ -47,10 +48,11 @@ export class AuthService {
     if (isExist) {
       throw new HttpException({ message: '当前手机号已注册过zFrontier, 请直接登录~' }, HttpStatus.UNPROCESSABLE_ENTITY);
     }
-    // await this.smsService.sendSms({
-    //   phoneNumberSet: [mobile],
-    //   templateId: '',
-    // })
+    return await this.smsService.sendSms({
+      phoneNumberSet: [mobile],
+      templateId: '1282279',
+      templateParamSet: [generateSmsShortId()]
+    })
   }
 
   /**

@@ -22,7 +22,7 @@ export class AuthController {
   @Post('mobile/authCode')
   @swagger.ApiOperation({ summary: '发送短信验证码', tags: ['用户和授权']})
   async sendSms(@Body() data: AuthCodeDto) {
-    await this.authService.sendRegisterSms(data.mobile);
+    return await this.authService.sendRegisterSms(data.mobile);
   }
 
   @Post('mobile/register')
@@ -42,6 +42,7 @@ export class AuthController {
   @swagger.ApiBody({ type: LoginByMobileDto })
   @ApiCustomOkResponse(UserResDto)
   async loginByMobile(@Req() request: Request) {
+    console.log('kkkkk')
     const user = request?.user as User;
     const accessTokenCookie = this.authService.getCookieByAccessToken(user.id);
     const refreshTokenCookie = this.authService.getCookieByRefreshToken(user.id);
@@ -49,6 +50,7 @@ export class AuthController {
     request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie.cookie]);
     return new UserEntity(user);
   }
+
 
   @Get('mobile/refresh')
   @UseGuards(JwtRefreshGuard)

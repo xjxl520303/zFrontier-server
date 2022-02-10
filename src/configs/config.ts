@@ -40,7 +40,8 @@ export default () => ({
     sms: {
       smsAppId: getEnv('TENCENTCLOUD_SMS_APP_ID'),
       region: getEnv('TENCENTCLOUD_SMS_REGION'),
-      signName: getEnv('TENCENTCLOUD_SMS_SIGN_NAME')
+      signName: getEnv('TENCENTCLOUD_SMS_SIGN_NAME'),
+      retries: getEnvNumber('TENCENTCLOUD_SMS_RETRIES', 3)
     },
     captcha: {
       captchaAppId: getEnv('TENCENTCLOUD_CAPTCHA_APP_ID'),

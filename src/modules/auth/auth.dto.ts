@@ -1,4 +1,4 @@
-import { IsIn, IsNotEmpty, IsObject, IsOptional, IsPhoneNumber, IsString, Length, MinLength, ValidateNested } from "class-validator";
+import { IsIn, IsNotEmpty, IsObject, IsOptional, IsMobilePhone, IsString, Length, MinLength, ValidateNested } from "class-validator";
 import * as swagger from '@nestjs/swagger';
 import { Type } from "class-transformer";
 
@@ -29,8 +29,8 @@ export class AuthCodeDto {
   type;
 
   @IsString()
-  @IsPhoneNumber('CH', { message: '手机号格式应为：+[国家（或地区）码][手机号]，例如：+8613711112222' })
-  @swagger.ApiProperty({ type: 'string', description: '手机号, 格式为：+[国家（或地区）码][手机号]' })
+  @IsMobilePhone('zh-CN', { strictMode: false }, { message: '手机号错误' })
+  @swagger.ApiProperty({ type: 'string', description: '手机号' })
   mobile;
 
   @IsString()
@@ -63,8 +63,8 @@ export class AuthCodeDto {
  */
 export class LoginByMobileDto {
   @IsString()
-  @IsPhoneNumber('CH', { message: '手机号格式应为：+[国家（或地区）码][手机号]，例如：+8613711112222' })
-  @swagger.ApiProperty({ type: 'string', description: '手机号, 格式为：+[国家（或地区）码][手机号]' })
+  @IsMobilePhone('zh-CN', { strictMode: false }, { message: '手机号错误' })
+  @swagger.ApiProperty({ type: 'string', description: '手机号' })
   mobile;
 
   @IsString()
@@ -83,8 +83,8 @@ export class mobileRegisterDto {
   type = 'register';
 
   @IsString()
-  @IsPhoneNumber('CH', { message: '手机号格式应为：+[国家（或地区）码][手机号]，例如：+8613711112222' })
-  @swagger.ApiProperty({ type: 'string', description: '手机号, 格式为：+[国家（或地区）码][手机号]' })
+  @IsMobilePhone('zh-CN', { strictMode: false }, { message: '手机号错误' })
+  @swagger.ApiProperty({ type: 'string', description: '手机号' })
   mobile: string;
 
   @IsString()

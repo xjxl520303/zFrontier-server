@@ -62,6 +62,7 @@ export interface TencentcloudConfig {
     smsAppId: string;
     region: string;
     signName: string;
+    retries: number;
   },
   captcha: {
     captchaAppId: string;
