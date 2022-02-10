@@ -37,5 +37,7 @@ lerna-debug.log*
 
 # IDE Theia Blueprint
 .theia/*
+!.theia/launch.json
+!.theia/settings.json
 
 /.env.local

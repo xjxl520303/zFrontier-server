@@ -1,0 +1,7 @@
+{
+    "maven.view": "hierarchical",
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.preferences.importModuleSpecifier": "relative"
+}
